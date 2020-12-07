@@ -4,7 +4,7 @@ question_file = "questions.txt"
 
 
 def get_file_data(filename):
-    with open(question_file, "r") as file:
+    with open(filename, "r") as file:
         master_list = []
         for line in file:
             line = line.strip()
