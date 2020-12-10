@@ -21,7 +21,6 @@ def check_sum(lst: list, num: int) -> bool:
 
 
 def inspect_xmas(full_list: list, preamble: int) -> int:
-
     for element in enumerate(full_list):
         if element[0] >= preamble:
             test = element[1]
@@ -30,10 +29,35 @@ def inspect_xmas(full_list: list, preamble: int) -> int:
                 return element[1]
 
 
+def find_less_reverse(full_list: list, target: int) -> int:
+    for element in reversed(list(enumerate(full_list))):
+        if element[1] < target:
+            return element[0]
+
+
+def encrypt_weakness(trimmed_list: list, sum_target: int) -> int:
+    i = 0
+    j = 1
+    curr_sum = trimmed_list[0] + trimmed_list[1]
+    while curr_sum != sum_target:
+        while curr_sum < sum_target:
+            j += 1
+            curr_sum += trimmed_list[j]
+        while curr_sum > sum_target:
+            curr_sum -= trimmed_list[i]
+            i += 1
+    contig = sorted(trimmed_list[i:j])
+    return sum([contig[0], contig[-1]])
+
+
 def main():
     xmas_list = get_file_data(xmas_data)
-    result = inspect_xmas(xmas_list, g_preamble)
-    print("The result is {}".format(result))
+    result_1 = inspect_xmas(xmas_list, g_preamble)
+    print("The part 1 result is {}".format(result_1))
+    upper_bound = find_less_reverse(xmas_list, result_1) + 1
+    trimmed_xmas_list = xmas_list[:upper_bound]
+    result_2 = encrypt_weakness(trimmed_xmas_list, result_1)
+    print("The part 2 result is {}".format(result_2))
 
 
 if __name__ == '__main__':
