@@ -38,7 +38,7 @@ def find_less_reverse(full_list: list, target: int) -> int:
 def encrypt_weakness(trimmed_list: list, sum_target: int) -> int:
     i = 0
     j = 1
-    curr_sum = trimmed_list[0] + trimmed_list[1]
+    curr_sum = trimmed_list[i] + trimmed_list[j]
     while curr_sum != sum_target:
         while curr_sum < sum_target:
             j += 1
